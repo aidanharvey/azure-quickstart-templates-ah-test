@@ -172,6 +172,16 @@
       "metadata": {
         "description": "Please type 'Yes' to accept the Tableau EULA which can be found here: https://mkt.tableau.com/files/tableau_eula.pdf. If you type No then the Azure resources will still be deployed but Tableau Server will not be installed."
       }
+    },
+	"resourceTags": {
+        "type": "object",
+        "defaultValue": {
+            "Use": "Insight Testing",
+			"Cost Center": "63977",
+			"Application Name": "Insight",
+			"Contact": "aharvey@munichre.digital",
+            "uptime": "Test"
+        }
     }
   },
   "variables": {
@@ -362,9 +372,10 @@
   },
   "resources": [
     {
-      "apiVersion": "2019-05-01",
+      "apiVersion": "2020-06-01",
       "name": "pid-6c922c23-cc65-4b76-8290-74feb0f3c476",
       "type": "Microsoft.Resources/deployments",
+	  "tags": "[parameters('resourceTags')]",
       "properties": {
         "mode": "Incremental",
         "template": {
@@ -376,8 +387,9 @@
     },
     {
       "type": "Microsoft.Network/virtualNetworks",
+	  "tags": "[parameters('resourceTags')]",
       "name": "[variables('virtualNetworkName')]",
-      "apiVersion": "2019-04-01",
+      "apiVersion": "2020-06-01",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[variables('NSGName')]"
@@ -402,21 +414,20 @@
       }
     },
     {
-      "apiVersion": "2019-04-01",
+      "apiVersion": "2020-06-01",
       "type": "Microsoft.Network/networkSecurityGroups",
       "name": "[variables('NSGName')]",
       "location": "[parameters('location')]",
-      "tags": {
-        "displayName": "[variables('NSGName')]"
-      },
+	  "tags": "[parameters('resourceTags')]",
       "properties": {
         "securityRules": "[if(variables('os_is_linux'),variables('LinuxsecurityRules'),variables('WindowssecurityRules'))]"
       }
     },
     {
       "type": "Microsoft.Network/publicIPAddresses",
+	  "tags": "[parameters('resourceTags')]",
       "name": "[concat('tabpip', copyindex(1))]",
-      "apiVersion": "2019-04-01",
+      "apiVersion": "2020-06-01",
       "location": "[parameters('location')]",
       "copy": {
         "name": "PipLoop",
@@ -434,8 +445,9 @@
     },
     {
       "type": "Microsoft.Network/networkInterfaces",
+	  "tags": "[parameters('resourceTags')]",
       "name": "[concat('tabnic', copyIndex(1))]",
-      "apiVersion": "2019-04-01",
+      "apiVersion": "2020-06-01",
       "location": "[parameters('location')]",
       "copy": {
         "name": "nicLoop",
@@ -464,8 +476,9 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines",
+	  "tags": "[parameters('resourceTags')]",
       "name": "[concat('tableau', copyIndex(1))]",
-      "apiVersion": "2019-07-01",
+      "apiVersion": "2020-06-01",
       "location": "[parameters('location')]",
       "copy": {
         "name": "virtualMachineLoop",
@@ -515,13 +528,11 @@
           "name": "[concat('tableau', copyIndex(1),'/CustomScript')]",
           "type": "Microsoft.Compute/virtualMachines/extensions",
           "location": "[parameters('location')]",
-          "apiVersion": "2019-07-01",
+          "apiVersion": "2020-06-01",
           "dependsOn": [
             "[resourceId('Microsoft.Compute/virtualMachines', concat('tableau', copyIndex(1)))]"
           ],
-          "tags": {
-            "displayName": "customscriptextension"
-          },
+			    "tags": "[parameters('resourceTags')]",
           "properties":
             "[if(variables('os_is_linux'),variables('lin_CSE_properties'),variables('win_CSE_properties'))]"
         }
