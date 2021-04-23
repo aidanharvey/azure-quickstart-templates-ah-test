@@ -130,3 +130,4 @@ else
 fi
 rm automated-installer.sh
 rm config.json
+
