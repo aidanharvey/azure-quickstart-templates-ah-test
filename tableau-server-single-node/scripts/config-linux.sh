@@ -4,7 +4,7 @@
 # sh ./config-linux.sh -u <username> -p <password> -h admin -i admin -j 98107 -k usa -l seattle -m data -n tech -o yes -q pm -r 8888888 -s tableau -t wa -v dev -w jamie -x jdata@tableau.com [-y <license key>]
 # customized to reflect machine admin username and admin password
 
-while getopts u:p:f:g:h:i:j:k:l:m:n:o:q:r:s:t:v:w:x:y: option
+while getopts u:p:f:g:e:h:i:j:k:l:m:n:o:q:r:s:t:v:w:x:y: option
 do
  case "${option}"
  in
@@ -12,6 +12,7 @@ do
  p) PASSWORD=${OPTARG};;
  f) OS=${OPTARG};;
  g) INSTALL_SCRIPT_URL=${OPTARG};;
+ e) TABLEAU_VERSION=${OPTARG};;
  h) TS_USER=${OPTARG};;
  i) TS_PASS=${OPTARG};;
  j) ZIP=${OPTARG};;
