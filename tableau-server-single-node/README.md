@@ -8,7 +8,7 @@
 
 ![Best Practice Check](https://azurequickstartsservice.blob.core.windows.net/badges/tableau-server-single-node/BestPracticeResult.svg)
 ![Cred Scan Check](https://azurequickstartsservice.blob.core.windows.net/badges/tableau-server-single-node/CredScanResult.svg)
-[![Deploy To Azure](https://github.com/aidanharvey/azure-quickstart-templates-ah-test/tree/main/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fgithub.com%2Faidanharvey%2Fazure-quickstart-templates-ah-test%2Fblob%2Fmain%2Ftableau-server-single-node%2Fazuredeploy.json)  [![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Ftableau-server-single-node%2Fazuredeploy.json)
+[![Deploy To Azure](https://raw.githubusercontent.com/aidanharvey/azure-quickstart-templates-ah-test/main/1-CONTRIBUTION-GUIDE/images/deploytoazure.png?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fgithub.com%2Faidanharvey%2Fazure-quickstart-templates-ah-test%2Fblob%2Fmain%2Ftableau-server-single-node%2Fazuredeploy.json)  [![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Ftableau-server-single-node%2Fazuredeploy.json)
 
 
 
