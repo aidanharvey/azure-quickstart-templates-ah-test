@@ -66,6 +66,10 @@ echo '{
 }' >> config.json
 wait
 
+# install package required for lsb_release command below
+yum install redhat-lsb-core
+wait
+
 # download tableau server .deb or.rpm file
 # retry on fail
 if [ "$(lsb_release -i|awk {'print $3'})" == "Ubuntu" ]
