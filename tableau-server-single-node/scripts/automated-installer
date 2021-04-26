@@ -395,18 +395,18 @@ check_arguments() {
       # way.
 
      if [ "$distro" = "rhel" ];then
-        version_string=$(rpm -qp --queryformat '%{NAME}\n' "$package_file" | sed -e "s/tableau-server-//")
+        version_string=$(rpm -qp --queryformat '%{NAME}\n' "$package_file" | sed -e "s/munichreserver-//")
      elif [ "$distro" = "debian" ];then
-        version_string=$(dpkg-deb -f "$package_file" Package | sed -e "s/tableau-server-//")
+        version_string=$(dpkg-deb -f "$package_file" Package | sed -e "s/munichreserver-//")
      else
         print_distro_not_supported_error_and_exit
      fi
   else
       if [ "$distro" = "rhel" ];then
         tmp=${use_repo%.x86_64}
-        version_string=${tmp#tableau-server-}
+        version_string=${tmp#munichreserver-}
       elif [ "$distro" = "debian" ];then
-        version_string=${use_repo#tableau-server-}
+        version_string=${use_repo#munichreserver-}
       else
         print_distro_not_supported_error_and_exit
       fi
