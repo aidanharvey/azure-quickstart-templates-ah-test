@@ -77,6 +77,7 @@ then
   wget --tries=3 --output-document=tableau-installer.deb https://downloads.tableau.com/esdalt/2020.1.1/tableau-server-2020-1-1_amd64.deb
 else
   wget --tries=3 --output-document=tableau-installer.rpm https://mrasinsightfiles.blob.core.windows.net/insight-installers/TableauServer-2019-4-9-MunichRE-x86_64.rpm
+  echo "Downloaded TableauServer-2019-4-9-MunichRE-x86_64.rpm" >> installer_log.txt
 fi
 
 if [ $? -ne 0 ]
@@ -103,6 +104,7 @@ then
   then
     sudo ./automated-installer.sh -s secrets -f config.json -r registration.json -a "$USER" --accepteula tableau-installer.deb --force
   else
+    echo "About to install TableauServer-2019-4-9-MunichRE-x86_64.rpm" >> installer_log.txt
     sudo ./automated-installer.sh -s secrets -f config.json -r registration.json -a "$USER" --accepteula tableau-installer.rpm --force
   fi
 else
@@ -116,22 +118,24 @@ fi
 
 wait
 
+echo "Finished installing TableauServer-2019-4-9-MunichRE-x86_64.rpm" >> installer_log.txt
+
 # if on RHEL, open firewall
-if [[ $(grep -E 'CentOS|Red Hat' /etc/os-release 2>/dev/null) ]]
-then
-  firewall-cmd --zone=public --add-port=80/tcp --permanent
-  firewall-cmd --reload
-fi
+# if [[ $(grep -E 'CentOS|Red Hat' /etc/os-release 2>/dev/null) ]]
+# then
+  # firewall-cmd --zone=public --add-port=80/tcp --permanent
+  # firewall-cmd --reload
+# fi
 
 # remove all install files
-rm registration.json
-rm secrets
-if [[ $(grep -E 'CentOS|Red Hat' /etc/os-release 2>/dev/null) ]]
-then
-  rm tableau-installer.rpm
-else
-  rm tableau-installer.deb
-fi
-rm automated-installer.sh
-rm config.json
+# rm registration.json
+# rm secrets
+# if [[ $(grep -E 'CentOS|Red Hat' /etc/os-release 2>/dev/null) ]]
+# then
+  # rm tableau-installer.rpm
+# else
+  # rm tableau-installer.deb
+# fi
+# rm automated-installer.sh
+# rm config.json
 
