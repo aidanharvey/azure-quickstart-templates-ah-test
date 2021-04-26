@@ -76,7 +76,7 @@ if [ "$(lsb_release -i|awk {'print $3'})" == "Ubuntu" ]
 then
   wget --tries=3 --output-document=tableau-installer.deb https://downloads.tableau.com/esdalt/2020.1.1/tableau-server-2020-1-1_amd64.deb
 else
-  wget --tries=3 --output-document=tableau-installer.rpm https://downloads.tableau.com/esdalt/2020.1.1/tableau-server-2020-1-1.x86_64.rpm
+  wget --tries=3 --output-document=tableau-installer.rpm https://mrasinsightfiles.blob.core.windows.net/insight-installers/TableauServer-2019-4-9-MunichRE-x86_64.rpm
 fi
 
 if [ $? -ne 0 ]
