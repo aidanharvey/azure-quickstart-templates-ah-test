@@ -501,18 +501,7 @@
           "osDisk": {
             "caching": "ReadWrite",
             "createOption": "FromImage"
-          },
-          "copy": [
-            {
-              "name": "dataDisks",
-              "count": 1,
-              "input": {
-                "diskSizeGB": 64,
-                "lun": "[copyIndex('dataDisks')]",
-                "createOption": "Empty"
-              }
-            }
-          ]
+          }
         },
         "networkProfile": {
           "networkInterfaces": [
