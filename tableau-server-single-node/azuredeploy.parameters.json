@@ -1,69 +1,81 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
   "parameters": {
-    "tableau_version": {
-      "value": "2019.4.6"
+    "_artifactsLocation": {
+      "value": "https://raw.githubusercontent.com/aidanharvey/azure-quickstart-templates-ah-test/main/tableau-server-single-node/"
+    },
+    "_artifactsLocationSasToken": {
+      "value": ""
+    },
+    "location": {
+      "value": "westeurope"
     },
     "OS": {
-      "value": "RHEL 7.7"
+      "value": "CentOS 7.5"
+    },
+    "tableau_version": {
+      "value": "2020.1.3"
+    },
+    "VMSize": {
+      "value": "Standard_D16s_v3"
     },
     "adminUsername": {
-      "value": "GEN-UNIQUE"
-    },
-    "tableau_admin_username": {
-      "value": "GEN-UNIQUE"
+      "value": "AHSystem"
     },
     "adminPassword": {
-      "value": "GEN-PASSWORD"
-    },
-    "tableau_admin_password": {
-      "value": "GEN-PASSWORD"
-    },
-    "registration_first_name": {
-      "value": "GEN-UNIQUE"
-    },
-    "registration_last_name": {
-      "value": "GEN-UNIQUE"
-    },
-    "registration_email": {
-      "value": "GEN-UNIQUE"
-    },
-    "registration_company": {
-      "value": "GEN-UNIQUE"
-    },
-    "registration_title": {
-      "value": "GEN-UNIQUE"
-    },
-    "registration_department": {
-      "value": "GEN-UNIQUE"
-    },
-    "registration_industry": {
-      "value": "GEN-UNIQUE"
-    },
-    "registration_phone": {
-      "value": "GEN-UNIQUE"
-    },
-    "registration_city": {
-      "value": "GEN-UNIQUE"
-    },
-    "registration_state": {
-      "value": "GEN-UNIQUE"
-    },
-    "registration_zip": {
-      "value": "GEN-UNIQUE"
-    },
-    "registration_country": {
-      "value": "GEN-UNIQUE"
+      "value": "Oregon123!!!"
     },
     "source_CIDR": {
-      "value": "0.0.0.0/0"
+      "value": "193.120.126.122/32"
+    },
+    "tableau_admin_username": {
+      "value": "Administrator"
+    },
+    "tableau_admin_password": {
+      "value": "Oregon123!!!"
+    },
+    "registration_first_name": {
+      "value": "Aidan"
+    },
+    "registration_last_name": {
+      "value": "Harvey"
+    },
+    "registration_email": {
+      "value": "aharvey@munichre.digital"
+    },
+    "registration_company": {
+      "value": "Munich RE Automation Solutions"
+    },
+    "registration_title": {
+      "value": "Analytics Development Manager"
+    },
+    "registration_department": {
+      "value": "Engineering"
+    },
+    "registration_industry": {
+      "value": "Software Development"
+    },
+    "registration_phone": {
+      "value": "012932888"
+    },
+    "registration_city": {
+      "value": "Leopardstown"
+    },
+    "registration_state": {
+      "value": "Dublin"
+    },
+    "registration_zip": {
+      "value": "Dublin 18"
+    },
+    "registration_country": {
+      "value": "Ireland"
+    },
+    "license_key": {
+      "value": "TSNM-6E4B-6620-B342-0F79"
     },
     "accept_eula": {
       "value": "Yes"
-    },
-    "VMSize": {
-      "value": "Standard_D4s_v3"
     }
   }
 }
