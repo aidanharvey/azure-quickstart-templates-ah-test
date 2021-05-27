@@ -194,8 +194,8 @@
     }
   },
   "variables": {
-    "virtualNetworkName": "[concat('TABVNET', variables('deployment_number'))]",
-	"NSGName": "[concat('TABNSG', variables('deployment_number'))]",
+    "virtualNetworkName": "[concat('TABVNET', parameters('deployment_number'))]",
+	"NSGName": "[concat('TABNSG', parameters('deployment_number'))]",
     "publicIPAddressType": "Dynamic",
     "addressPrefix": "10.0.0.0/16",
     "subnet1Name": "Subnet-1",
@@ -442,7 +442,7 @@
     {
       "type": "Microsoft.Network/publicIPAddresses",
 	  "tags": "[parameters('resourceTags')]",
-      "name": "[concat('tabpip', copyindex(1), variables('deployment_number'))]",
+      "name": "[concat('tabpip', copyindex(1), parameters('deployment_number'))]",
       "apiVersion": "2020-06-01",
       "location": "[parameters('location')]",
       "copy": {
@@ -455,14 +455,14 @@
       "properties": {
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
         "dnsSettings": {
-          "domainNameLabel": "[concat('a', variables('publicIpName'), copyIndex(1), variables('deployment_number'))]"
+          "domainNameLabel": "[concat('a', variables('publicIpName'), copyIndex(1), parameters('deployment_number'))]"
         }
       }
     },
     {
       "type": "Microsoft.Network/networkInterfaces",
 	  "tags": "[parameters('resourceTags')]",
-      "name": "[concat('tabnic', copyIndex(1), variables('deployment_number'))]",
+      "name": "[concat('tabnic', copyIndex(1), parameters('deployment_number'))]",
       "apiVersion": "2020-06-01",
       "location": "[parameters('location')]",
       "copy": {
@@ -479,7 +479,7 @@
             "name": "ipconfig1",
             "properties": {
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses/', concat('tabpip', copyIndex(1), variables('deployment_number')))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses/', concat('tabpip', copyIndex(1), parameters('deployment_number')))]"
               },
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
@@ -493,7 +493,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines",
 	  "tags": "[parameters('resourceTags')]",
-      "name": "[concat('tableau', copyIndex(1), variables('deployment_number'))]",
+      "name": "[concat('tableau', copyIndex(1), parameters('deployment_number'))]",
       "apiVersion": "2020-06-01",
       "location": "[parameters('location')]",
       "copy": {
@@ -508,7 +508,7 @@
           "vmSize": "[variables('virtualMachineSize')]"
         },
         "osProfile": {
-          "computerName": "[concat('tableauvm', copyIndex(1), variables('deployment_number'))]",
+          "computerName": "[concat('tableauvm', copyIndex(1), parameters('deployment_number'))]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
@@ -522,7 +522,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat('tabnic', copyIndex(1), variables('deployment_number')))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat('tabnic', copyIndex(1), parameters('deployment_number')))]"
             }
           ]
         }
@@ -530,12 +530,12 @@
       "resources": [
         {
           "condition": "[equals(parameters('accept_eula'), 'Yes')]",
-          "name": "[concat('tableau', copyIndex(1), variables('deployment_number'),'/CustomScript')]",
+          "name": "[concat('tableau', copyIndex(1), parameters('deployment_number'),'/CustomScript')]",
           "type": "Microsoft.Compute/virtualMachines/extensions",
           "location": "[parameters('location')]",
           "apiVersion": "2020-06-01",
           "dependsOn": [
-            "[resourceId('Microsoft.Compute/virtualMachines', concat('tableau', copyIndex(1), variables('deployment_number')))]"
+            "[resourceId('Microsoft.Compute/virtualMachines', concat('tableau', copyIndex(1), parameters('deployment_number')))]"
           ],
 		  "tags": "[parameters('resourceTags')]",
           "properties":
