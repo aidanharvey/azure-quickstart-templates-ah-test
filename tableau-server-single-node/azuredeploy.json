@@ -218,7 +218,7 @@
       "CentOS 7.9": {
         "publisher": "OpenLogic",
         "offer": "CentOS",
-        "sku": "7.9",
+        "sku": "7_9-gen2",
         "version": "latest"
       },
       "RHEL 7.7": {
