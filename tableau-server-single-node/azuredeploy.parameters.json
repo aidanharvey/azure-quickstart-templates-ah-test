@@ -12,13 +12,13 @@
       "value": "westeurope"
     },
     "OS": {
-      "value": "CentOS 7.5"
+      "value": "CentOS 7.9"
     },
     "tableau_version": {
       "value": "2020.1.3"
     },
     "VMSize": {
-      "value": "Standard_D16s_v3"
+      "value": "Standard_D8s_v4"
     },
     "adminUsername": {
       "value": "AHSystem"

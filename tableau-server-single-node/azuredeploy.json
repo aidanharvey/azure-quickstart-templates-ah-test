@@ -27,7 +27,8 @@
       "type": "string",
       "allowedValues": [
         "Ubuntu 16.04 LTS",
-        "CentOS 7.5", 
+        "CentOS 7.5",
+		"CentOS 7.9",
         "RHEL 7.7", 
         "Windows 2019-Datacenter",
         "Windows 2016-Datacenter",
@@ -48,7 +49,7 @@
     },
     "VMSize": {
       "type": "string",
-      "allowedValues": ["Standard_D16s_v3","Standard_D32s_v3","Standard_D48s_v3","Standard_D4s_v3"],
+      "allowedValues": ["Standard_D16s_v3","Standard_D32s_v3","Standard_D48s_v3","Standard_D4s_v3","Standard_D8s_v4"],
       "metadata": {
         "description": "Please select the size of the VM you wish to deploy.  Tableau Server should be deployed on a machine with at least 16 vCPUs.  Standard_D4s_v3 is provided for testing only.  Read more about sizing options here: https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-general"
       },
@@ -195,7 +196,8 @@
     "virtualMachineSize": "[parameters('VMSize')]",
     "linux_os": [
       "Ubuntu 16.04 LTS",
-      "CentOS 7.5", 
+      "CentOS 7.5",
+	  "CentOS 7.9",
       "RHEL 7.7"
     ],
     "os_is_linux": "[contains(variables('linux_os'),parameters('OS'))]", //true if linux
@@ -210,6 +212,12 @@
         "publisher": "OpenLogic",
         "offer": "CentOS",
         "sku": "7.5",
+        "version": "latest"
+      },
+      "CentOS 7.9": {
+        "publisher": "OpenLogic",
+        "offer": "CentOS",
+        "sku": "7.9",
         "version": "latest"
       },
       "RHEL 7.7": {
