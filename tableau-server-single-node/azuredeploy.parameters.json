@@ -76,6 +76,9 @@
     },
     "accept_eula": {
       "value": "Yes"
+    },
+	"deployment_number": {
+      "value": "2"
     }
   }
 }

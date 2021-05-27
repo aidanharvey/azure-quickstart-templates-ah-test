@@ -174,6 +174,13 @@
         "description": "Please type 'Yes' to accept the Tableau EULA which can be found here: https://mkt.tableau.com/files/tableau_eula.pdf. If you type No then the Azure resources will still be deployed but Tableau Server will not be installed."
       }
     },
+    "deployment_number": {
+      "type": "string",
+      "defaultValue": "1",
+      "metadata": {
+        "description": "Number to append to names of created resources, to distinguish separate deployments"
+      }
+    },
 	"resourceTags": {
         "type": "object",
         "defaultValue": {
@@ -187,8 +194,8 @@
     }
   },
   "variables": {
-    "virtualNetworkName": "TABVNET",
-    "NSGName": "TABNSG",
+    "virtualNetworkName": "[concat('TABVNET', variables('deployment_number'))]"
+	"NSGName": "[concat('TABNSG', variables('deployment_number'))]",
     "publicIPAddressType": "Dynamic",
     "addressPrefix": "10.0.0.0/16",
     "subnet1Name": "Subnet-1",
@@ -435,7 +442,7 @@
     {
       "type": "Microsoft.Network/publicIPAddresses",
 	  "tags": "[parameters('resourceTags')]",
-      "name": "[concat('tabpip', copyindex(1))]",
+      "name": "[concat('tabpip', copyindex(1), variables('deployment_number'))]",
       "apiVersion": "2020-06-01",
       "location": "[parameters('location')]",
       "copy": {
@@ -448,14 +455,14 @@
       "properties": {
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
         "dnsSettings": {
-          "domainNameLabel": "[concat('a', variables('publicIpName'), copyIndex(1))]"
+          "domainNameLabel": "[concat('a', variables('publicIpName'), copyIndex(1), variables('deployment_number'))]"
         }
       }
     },
     {
       "type": "Microsoft.Network/networkInterfaces",
 	  "tags": "[parameters('resourceTags')]",
-      "name": "[concat('tabnic', copyIndex(1))]",
+      "name": "[concat('tabnic', copyIndex(1), variables('deployment_number'))]",
       "apiVersion": "2020-06-01",
       "location": "[parameters('location')]",
       "copy": {
@@ -472,7 +479,7 @@
             "name": "ipconfig1",
             "properties": {
               "publicIPAddress": {
-                "id": "[resourceId('Microsoft.Network/publicIPAddresses/', concat('tabpip', copyIndex(1)))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses/', concat('tabpip', copyIndex(1), variables('deployment_number')))]"
               },
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
@@ -486,7 +493,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines",
 	  "tags": "[parameters('resourceTags')]",
-      "name": "[concat('tableau', copyIndex(1))]",
+      "name": "[concat('tableau', copyIndex(1), variables('deployment_number'))]",
       "apiVersion": "2020-06-01",
       "location": "[parameters('location')]",
       "copy": {
@@ -501,7 +508,7 @@
           "vmSize": "[variables('virtualMachineSize')]"
         },
         "osProfile": {
-          "computerName": "[concat('tableauvm', copyIndex(1))]",
+          "computerName": "[concat('tableauvm', copyIndex(1), variables('deployment_number'))]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
@@ -515,7 +522,7 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat('tabnic', copyIndex(1)))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat('tabnic', copyIndex(1), variables('deployment_number')))]"
             }
           ]
         }
@@ -523,14 +530,14 @@
       "resources": [
         {
           "condition": "[equals(parameters('accept_eula'), 'Yes')]",
-          "name": "[concat('tableau', copyIndex(1),'/CustomScript')]",
+          "name": "[concat('tableau', copyIndex(1), variables('deployment_number'),'/CustomScript')]",
           "type": "Microsoft.Compute/virtualMachines/extensions",
           "location": "[parameters('location')]",
           "apiVersion": "2020-06-01",
           "dependsOn": [
-            "[resourceId('Microsoft.Compute/virtualMachines', concat('tableau', copyIndex(1)))]"
+            "[resourceId('Microsoft.Compute/virtualMachines', concat('tableau', copyIndex(1), variables('deployment_number')))]"
           ],
-			    "tags": "[parameters('resourceTags')]",
+		  "tags": "[parameters('resourceTags')]",
           "properties":
             "[if(variables('os_is_linux'),variables('lin_CSE_properties'),variables('win_CSE_properties'))]"
         }
