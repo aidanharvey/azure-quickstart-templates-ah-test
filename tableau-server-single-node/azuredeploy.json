@@ -194,7 +194,7 @@
     }
   },
   "variables": {
-    "virtualNetworkName": "[concat('TABVNET', variables('deployment_number'))]"
+    "virtualNetworkName": "[concat('TABVNET', variables('deployment_number'))]",
 	"NSGName": "[concat('TABNSG', variables('deployment_number'))]",
     "publicIPAddressType": "Dynamic",
     "addressPrefix": "10.0.0.0/16",
