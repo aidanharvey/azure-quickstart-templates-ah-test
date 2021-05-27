@@ -177,11 +177,12 @@
 	"resourceTags": {
         "type": "object",
         "defaultValue": {
-            "Use": "Insight Testing",
+            "Use": "Development",
 			"Cost Center": "63977",
-			"Application Name": "Insight",
-			"Contact": "aharvey@munichre.digital",
-            "uptime": "Test"
+			"Company Code": "1390",
+			"Application Name": "MR Automation Solution",
+			"Contact": "ddempsey@munichre.com",
+            "uptime": "ignore"
         }
     }
   },
